@@ -9,14 +9,12 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-var username = encodeURIComponent("Yproduct@admin");
-var password = encodeURIComponent("product123");
-mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.eecbc.mongodb.net/?retryWrites=true&w=majority`).then(() => console.log("connect")).catch((error) => console.log(error));
+mongoose.connect(`mongodb+srv://shariquefaridi786:sharique786@cluster0.vtql5m7.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => app.listen(4000, () => {
+    console.log("server Connect")
+})).catch((error) => console.log(error));
 
 app.use("/", produtRouter);
-app.listen(4000, () => {
-    console.log("server Connect")
-})
+
 
 
 

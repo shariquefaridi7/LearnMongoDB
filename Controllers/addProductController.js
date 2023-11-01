@@ -1,26 +1,37 @@
 import productDel from '../Models/addProductModel.js'
-export const addProduct = async () => {
+export const addProduct = async (req, res) => {
 
-    const { productName } = req.body;
-    const resData = await productDel.create({ productName });
-    resData.status(200).send(resData);
+    const { userName } = req.body;
+    const resData = await productDel.create({ userName });
+
+    res.status(200).send(resData);
 
 }
 
-export const getProduct = async () => {
-    const { _id } = req.params;
-    const resData = await productDel.find({ _id });
-    resData.status(200).send(resData);
+export const getProduct = async (req, res) => {
+    const { id } = req.params;
+
+    const resData = await productDel.findOne({ _id: id });
+    res.status(200).send(resData);
+
 }
 
-export const delProduct = async () => {
-    const { _id } = req.params;
-    const resData = await productDel.delete({ _id });
-    resData.status(200).send(resData);
+export const delProduct = async (req, res) => {
+    const { id } = req.params;
+    await productDel.deleteOne({ _id: id });
+    res.status(200).send("Delete Success");
 }
 
-export const updateProduct = async () => {
-    const { _id } = req.params;
-    const resData = await productDel.update({ _id });
-    resData.status(200).send(resData);
+export const updateProduct = async (req, res) => {
+    const updateUserName = req.body.userName;
+
+    const { id } = req.params;
+
+    const a = await productDel.findOneAndUpdate({ _id: id }, { userName: updateUserName });
+    if (a) {
+        res.status(200).send("Update Success")
+    } else {
+        res.status(400).send("something is wrong")
+    }
+
 }
