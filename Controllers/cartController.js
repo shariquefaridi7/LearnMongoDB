@@ -27,3 +27,11 @@ export const addCart = async (req, res) => {
 
 
 }
+
+export const delCart = async (req, res) => {
+
+    const { id } = req.params;
+    await cartModel.deleteOne({ _id: id });
+    res.send("Delete")
+
+}
