@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import produtRouter from './Routes/addProductRoute.js';
+import cartRouter from './Routes/cartRoute.js';
 
 
 const app = express();
@@ -14,6 +15,7 @@ mongoose.connect(`mongodb+srv://shariquefaridi786:sharique786@cluster0.vtql5m7.m
 })).catch((error) => console.log(error));
 
 app.use("/", produtRouter);
+app.use("/", cartRouter);
 
 
 
